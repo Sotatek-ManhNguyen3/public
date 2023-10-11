@@ -1,0 +1,108 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Noto+Sans+Arabic&family=Noto+Sans+&family=Noto+Sans+Bengali"
+        rel="stylesheet">
+    <style>
+        *[lang="ja"] {
+            font-family: 'Noto Sans JP', cursive;
+        }
+
+        *[lang="cn"] {
+            font-family: 'Noto Sans JP', cursive;
+        }
+
+        *[lang="kr"] {
+            font-family: 'Noto Sans KR', cursive;
+        }
+
+        *[lang="ar"] {
+            font-family: 'Noto Sans Arabic', cursive;
+        }
+
+        *[lang="ru"] {
+            font-family: 'Noto Sans JP', cursive;
+        }
+
+        *[lang="vi"] {
+            font-family: 'Noto Sans JP', cursive;
+        }
+
+        *[lang="in"] {
+            font-family: 'Noto Sans Bengali', cursive;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div>Test Where2Go multi languages font supported</div>
+    <ul>
+     <li>Japanese: <span lang="ja">明朝体, ゴシック体</span></li>
+     <li>Chinese: <span lang="cn">宋体, 黑体</span></li>
+     <li>Korean: <span lang="kr">한글체, 고딕체</span></li>
+     <li>Arabic: <span lang="ar"> يقتلونني دائما ً</span></li>
+     <li>Rusian: <span lang="ru">Александр Сергеевич Пушкин</span></li>
+     <li>Vietnam: <span lang="vi">Việt Nam</span></li>
+     <li>Indian: <span lang="in">যেহে তু জাতিসমূহের</span></li>
+    </ul>
+
+<p>Menu name</p>
+<h1>{{ $menuName }}</h1>
+
+<p>Spot name</p>
+<h2>{{ $spotName }}</h2>
+
+<p>Menu book name (Ja)</p>
+<h2>{{ $menuBookNameJa }}</h2>
+
+<p>Menu book name (En)</p>
+<h2>{{ $menuBookNameEn }}</h2>
+
+@foreach ($categories as $category)
+    <p>Category name</p>
+    <h3 lang="ja">{{ $category['name'] }}</h3>
+    @php($menus = $category['menus'])
+    <p>Menus information</p>
+
+    @foreach($menus as $key => $menu)
+        <strong>{{$key}}</strong>
+        <ul>
+            <li>Menu name: {{ $menu['name'] }}</li>
+            <li>Menu price: {{ $menu['price'] }}</li>
+            <li>Menu images:
+                <ul>
+                    @foreach($menu['images'] as $image)
+                        <li><img class="menu-image" src="{{$image}}" alt="thumbnail"/></li>
+                    @endforeach
+                </ul>
+            </li>
+            <li>Menu name translations
+                <ul>
+                    @foreach($menu['nameTranslations'] as $translation)
+                        <li>Language key: {{$translation['languageKey']}}, Language label: {{$translation['languageLabel']}}, Value: {{$translation['value']}}</li>
+                    @endforeach
+                </ul>
+            </li>
+            <li>Menu pictograms:
+                @foreach($menu['pictograms'] as $pictogramInfo)
+                    <ul>
+                        <li>Pictogram category: {{$pictogramInfo['categoryName']}}</li>
+                        <li>Pictograms</li>
+                        <li class="pictograms">
+                            @foreach($pictogramInfo['pictograms'] as $pictogram)
+                                <img class="img-pictogram" src="{{$pictogram['image']}}" alt="{{$pictogram['name']}}"/>
+                            @endforeach
+                        </li>
+                    </ul>
+                @endforeach
+            </li>
+        </ul>
+    @endforeach
+@endforeach
+</body>
+</html>
