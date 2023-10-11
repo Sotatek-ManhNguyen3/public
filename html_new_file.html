@@ -40,20 +40,19 @@
 
 <body>
 <p>Menu name</p>
-<h1><span lang="ja">{{ $menuName }}</span></h1>
+<div><span lang="ja">{{ $menuName }}</span></div>
 
 <p>Spot name</p>
 <h2>{{ $spotName }}</h2>
 
 <p>Menu book name (Ja)</p>
-<h2><span lang="ja">{{ $menuBookNameJa }}</span></h2>
+<div><span lang="ja">{{ $menuBookNameJa }}</span></div>
 
 <p>Menu book name (En)</p>
 <h2>{{ $menuBookNameEn }}</h2>
 
 @foreach ($categories as $category)
     <p>Category name</p>
-    <h3><span lang="ja">{{ $category['name'] }}</span></h3>
     <div><span lang="ja">{{ $category['name'] }}</span></div>
     @php($menus = $category['menus'])
     <p>Menus information</p>
