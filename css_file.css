@@ -18,6 +18,7 @@ p {
     flex-direction: row;
     flex-wrap: wrap;
     min-height: 60px;
+    align-items: flex-end;
 }
 
 .img-pictogram {
