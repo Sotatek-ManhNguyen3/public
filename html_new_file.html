@@ -86,8 +86,7 @@
                     <ul>
                         <li>Pictogram category: <span lang="ja">{{$pictogramInfo['categoryName']}}</span></li>
                         <li>Pictograms</li>
-                        <li></li>
-                        <div>
+                        <div style="margin-top: 20px">
                             @foreach($pictogramInfo['pictograms'] as $pictogram)
                                 <img class="img-pictogram" src="{{$pictogram['image']}}" alt="{{$pictogram['name']}}"/>
                             @endforeach
