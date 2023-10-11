@@ -83,13 +83,13 @@
             <li>Menu pictograms:
                 @foreach($menu['pictograms'] as $pictogramInfo)
                     <ul>
-                        <li>Pictogram category: {{$pictogramInfo['categoryName']}}</li>
+                        <li>Pictogram category: <span lang="ja">{{$pictogramInfo['categoryName']}}</span></li>
                         <li>Pictograms</li>
-                        <li class="pictograms">
+                        <div class="pictograms">
                             @foreach($pictogramInfo['pictograms'] as $pictogram)
                                 <img class="img-pictogram" src="{{$pictogram['image']}}" alt="{{$pictogram['name']}}"/>
                             @endforeach
-                        </li>
+                        </div>
                     </ul>
                 @endforeach
             </li>
