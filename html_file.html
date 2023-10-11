@@ -54,6 +54,7 @@
 @foreach ($categories as $category)
     <p>Category name</p>
     <h3><span lang="ja">{{ $category['name'] }}</span></h3>
+    <div><span lang="ja">{{ $category['name'] }}</span></div>
     @php($menus = $category['menus'])
     <p>Menus information</p>
 
