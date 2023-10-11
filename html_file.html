@@ -17,7 +17,7 @@
     <p>Menus information</p>
 
     @foreach($menus as $key => $menu)
-        <strong>$key</strong>
+        <strong>{{$key}}</strong>
         <ul>
             <li>Menu name: {{ $menu['name'] }}</li>
             <li>Menu price: {{ $menu['price'] }}</li>
@@ -30,7 +30,7 @@
             </li>
             <li>Menu name translations
                 <ul>
-                    @foreach($menu['nameTranslations'] as $translation) 
+                    @foreach($menu['nameTranslations'] as $translation)
                         <li>Language key: {{$translation['languageKey']}}, Language label: {{$translation['languageLabel']}}, Value: {{$translation['value']}}</li>
                     @endforeach
                 </ul>
@@ -42,7 +42,7 @@
                         <li>Pictograms</li>
                         <li class="pictograms">
                             @foreach($pictogramInfo['pictograms'] as $pictogram)
-                                <img src="{{$pictogram['image']}}" alt="{{$pictogram['name']}}"/>
+                                <img class="img-pictogram" src="{{$pictogram['image']}}" alt="{{$pictogram['name']}}"/>
                             @endforeach
                         </li>
                     </ul>
