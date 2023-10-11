@@ -51,6 +51,10 @@
 <p>Menu book name (En)</p>
 <h2>{{ $menuBookNameEn }}</h2>
 
+@foreach($images as $image)
+    <img class="menu-image" src="{{$image}}" alt="menu design image"/>
+@endforeach
+
 @foreach ($categories as $category)
     <p>Category name</p>
     <div><span lang="ja">{{ $category['name'] }}</span></div>
