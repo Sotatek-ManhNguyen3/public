@@ -39,33 +39,21 @@
 </head>
 
 <body>
-
-    <div>Test Where2Go multi languages font supported</div>
-    <ul>
-     <li>Japanese: <span lang="ja">明朝体, ゴシック体</span></li>
-     <li>Chinese: <span lang="cn">宋体, 黑体</span></li>
-     <li>Korean: <span lang="kr">한글체, 고딕체</span></li>
-     <li>Arabic: <span lang="ar"> يقتلونني دائما ً</span></li>
-     <li>Rusian: <span lang="ru">Александр Сергеевич Пушкин</span></li>
-     <li>Vietnam: <span lang="vi">Việt Nam</span></li>
-     <li>Indian: <span lang="in">যেহে তু জাতিসমূহের</span></li>
-    </ul>
-
 <p>Menu name</p>
-<h1>{{ $menuName }}</h1>
+<h1><span lang="ja">{{ $menuName }}</span></h1>
 
 <p>Spot name</p>
 <h2>{{ $spotName }}</h2>
 
 <p>Menu book name (Ja)</p>
-<h2>{{ $menuBookNameJa }}</h2>
+<h2><span lang="ja">{{ $menuBookNameJa }}</span></h2>
 
 <p>Menu book name (En)</p>
 <h2>{{ $menuBookNameEn }}</h2>
 
 @foreach ($categories as $category)
     <p>Category name</p>
-    <h3 lang="ja">{{ $category['name'] }}</h3>
+    <h3><span lang="ja">{{ $category['name'] }}</span></h3>
     @php($menus = $category['menus'])
     <p>Menus information</p>
 
@@ -84,7 +72,7 @@
             <li>Menu name translations
                 <ul>
                     @foreach($menu['nameTranslations'] as $translation)
-                        <li>Language key: {{$translation['languageKey']}}, Language label: {{$translation['languageLabel']}}, Value: {{$translation['value']}}</li>
+                        <li>Language key: {{$translation['languageKey']}}, Language label: <span lang="{{strtolower($translation['languageKey'])}}">{{$translation['languageLabel']}}</span>, Value: <span lang="{{strtolower($translation['languageKey'])}}">{{$translation['value']}}</span></li>
                     @endforeach
                 </ul>
             </li>
