@@ -35,8 +35,6 @@
         *[lang="in"] {
             font-family: 'Noto Sans Bengali', cursive;
         }
-
-        /* CustomStyles */
     </style>
 </head>
 
@@ -55,7 +53,7 @@
 
 @foreach ($categories as $category)
     <p>Category name</p>
-    <h3>{{ $category['name'] }}</h3>
+    <h3 lang="ja">{{ $category['name'] }}</h3>
     @php($menus = $category['menus'])
     <p>Menus information</p>
 
