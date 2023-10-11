@@ -1,7 +1,53 @@
-<style>
-    /* CustomStyles */
-</style>
+<p>Menu name</p>
+<h1>{{ $menuName }}</h1>
 
-<h1>Hello</h1>
+<p>Spot name</p>
+<h2>{{ $spotName }}</h2>
 
-<p>ABCDEF</p>
+<p>Menu book name (Ja)</p>
+<h2>{{ $menuBookNameJa }}</h2>
+
+<p>Menu book name (En)</p>
+<h2>{{ $menuBookNameEn }}</h2>
+
+@foreach ($categories as $category)
+    <p>Category name</p>
+    <h3>{{ $category['name'] }}</h3>
+    @php($menus = $category['menus'])
+    <p>Menus information</p>
+
+    @foreach($menus as $key => $menu)
+        <strong>$key</strong>
+        <ul>
+            <li>Menu name: {{ $menu['name'] }}</li>
+            <li>Menu price: {{ $menu['price'] }}</li>
+            <li>Menu images:
+                <ul>
+                    @foreach($menu['images'] as $image)
+                        <li><img class="menu-image" src="{{$image}}" alt="thumbnail"/></li>
+                    @endforeach
+                </ul>
+            </li>
+            <li>Menu name translations
+                <ul>
+                    @foreach($menu['nameTranslations'] as $translation) 
+                        <li>Language key: {{$translation['languageKey']}}, Language label: {{$translation['languageLabel']}}, Value: {{$translation['value']}}</li>
+                    @endforeach
+                </ul>
+            </li>
+            <li>Menu pictograms:
+                @foreach($menu['pictograms'] as $pictogramInfo)
+                    <ul>
+                        <li>Pictogram category: {{$pictogramInfo['categoryName']}}</li>
+                        <li>Pictograms</li>
+                        <li class="pictograms">
+                            @foreach($pictogramInfo['pictograms'] as $pictogram)
+                                <img src="{{$pictogram['image']}}" alt="{{$pictogram['name']}}"/>
+                            @endforeach
+                        </li>
+                    </ul>
+                @endforeach
+            </li>
+        </ul>
+    @endforeach
+@endforeach
