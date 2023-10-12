@@ -41,8 +41,26 @@
 </head>
 
 <body>
+<p>Menu text</p>
+<ul>
+@foreach($menuText as $text)
+    <li>Language {{$text['language']}}: <span lang="{{strtolower($text['language'])}}">{{$text['value']}}</span></li>
+@endforeach
+</ul>
+
+<p>Tax included text</p>
+<ul>
+@foreach($taxIncludedText as $text)
+    <li>Language {{$text['language']}}: <span lang="{{strtolower($text['language'])}}">{{$text['value']}}</span></li>
+@endforeach
+</ul>
+
 <p>Spot name</p>
-<h2>{{ $spotName }}</h2>
+<ul>
+    @foreach($spotName as $text)
+        <li>Language {{$text['languageKey']}}: <span lang="{{strtolower($text['languageKey'])}}">{{$text['value']}}</span></li>
+    @endforeach
+</ul>
 
 <p>Menu book name (Ja)</p>
 <div><span lang="ja">{{ $menuBookNameJa }}</span></div>
@@ -57,22 +75,26 @@
 
 @foreach ($categories as $category)
     <p>Category name</p>
-    <div><span lang="ja">{{ $category['name'] }}</span></div>
+    <div>
+        @foreach($category['name'] as $name)
+            <span lang="{{strtolower($name['language'])}}">{{ $name['value'] }}/</span>
+        @endforeach
+    </div>
     @php($menus = $category['menus'])
     <p>Menus information</p>
 
     @foreach($menus as $key => $menu)
-        <strong>{{$key}}</strong>
+        <br/>
+        <strong>{{$key + 1}}</strong>
         <ul>
             <li>Menu name: {{ $menu['name'] }}</li>
             <li>Menu price: {{ $menu['price'] }}</li>
-            <li>Menu images:
-                <ul>
-                    @foreach($menu['images'] as $image)
-                        <li><img class="menu-image" src="{{$image}}" alt="thumbnail"/></li>
-                    @endforeach
-                </ul>
-            </li>
+            <li>Menu images:</li>
+            <br/>
+            <br/>
+            @foreach($menu['images'] as $image)
+                <img class="menu-image" src="{{$image}}" alt="thumbnail"/>
+            @endforeach
             <li>Menu name translations
                 <ul>
                     @foreach($menu['nameTranslations'] as $translation)
@@ -80,20 +102,13 @@
                     @endforeach
                 </ul>
             </li>
-            <li>Menu pictograms:
-                @foreach($menu['pictograms'] as $pictogramInfo)
-                    <ul>
-                        <li>Pictogram category: <span lang="ja">{{$pictogramInfo['categoryName']}}</span></li>
-                        <li>Pictograms</li>
-                        <div style="margin-top: 20px">
-                            @foreach($pictogramInfo['pictograms'] as $pictogram)
-                                <img class="img-pictogram" src="{{$pictogram['image']}}" alt="{{$pictogram['name']}}"/>
-                            @endforeach
-                        </div>
-                    </ul>
-                @endforeach
-            </li>
+            <li>Menu pictograms</li>
         </ul>
+        <br/>
+        <br/>
+        @foreach($menu['pictograms'] as $pictogram)
+            <img class="img-pictogram" src="{{$pictogram}}" alt="pictogram"/>
+        @endforeach
     @endforeach
 @endforeach
 </body>
