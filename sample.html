@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja" itemscope itemtype="http://schema.org/Organization">
+<head>
+    <meta charset="UTF-8">
+    <title>Test blade</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="robots" content="NOINDEX,NOFOLLOW"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="test.css" media="all" type="text/css">
+    <link rel="stylesheet" type="text/css" media="print" href="test.css">
+    <style>
+        *[lang="ja"] {
+            font-family: 'Noto Sans JP', cursive;
+        }
+
+        *[lang="cn"] {
+            font-family: 'Noto Sans JP', cursive;
+        }
+
+        *[lang="kr"] {
+            font-family: 'Noto Sans KR', cursive;
+        }
+
+        *[lang="ar"] {
+            font-family: 'Noto Sans Arabic', cursive;
+        }
+
+        *[lang="ru"] {
+            font-family: 'Noto Sans JP', cursive;
+        }
+
+        *[lang="vi"] {
+            font-family: 'Noto Sans JP', cursive;
+        }
+
+        *[lang="in"] {
+            font-family: 'Noto Sans Bengali', cursive;
+        }
+
+        /* CustomStyles */
+    </style>
+</head>
+
+<body class="print template">
+
+@if ($taxIncludedText && $printAllLanguage)
+    @php
+        $styledTaxIncludedText = implode("/", array_map(function ($item) {
+            return "<span lang='" . strtolower($item['language']) . "'>" . $item['value'] . "</span>";
+        }, $taxIncludedText->toArray()))
+    @endphp
+@endif
+
+@if (isset($language) && $language)
+    @php
+        $language = strtolower($language)
+    @endphp
+@endif
+
+<!--表紙-->
+<section class="page cover">
+    <div class="spot-name-container">
+        <div class="main"><span lang="ja">{!! $printAllLanguage ? '寿司 まぐろ漁港' : "<span lang='$language'>$spotName</span>" !!}</span></div>
+        <div class="sub">{!! $printAllLanguage ? 'Sushi Maguro-Gyoko' : "<span lang='ja'>$spotNameJa</span>" !!}</div>
+    </div>
+    <div class="menu-book-name-container">
+        <div class="main"><span lang="ja">{!! $printAllLanguage ? $menuTextJa : "<span lang='$language'>$menuText</span>" !!}</span></div>
+        @if ($menuText && $printAllLanguage)
+            @php
+                $listMenuText = implode("/", array_map(function ($item) {
+                    return "<span lang='" . strtolower($item['language']) . "'>" . $item['value'] . "</span>";
+                }, $menuText))
+            @endphp
+        @endif
+        <div class="sub">{!! $printAllLanguage ? $listMenuText ?? '' : "<span lang='ja'>$menuTextJa</span>" !!}</div>
+    </div>
+    <div class="page-title-container">
+        <div class="main"><span lang="{{ $printAllLanguage ? 'ja' : 'en' }}">{{ $printAllLanguage ? $menuBookNameJa : $menuBookNameEn }}</span></div>
+        <div class="sub"><span lang="{{ $printAllLanguage ? 'en' : 'ja' }}">{{ $printAllLanguage ? $menuBookNameEn : $menuBookNameJa }}</span></div>
+    </div>
+</section>
+
+@foreach ($categories as $index => $category)
+    @php
+        // Prevent last empty page
+        $class = $index == count($categories) - 1 ? 'page last-page' : 'page'
+    @endphp
+    <section class="{{$class}}">
+        <article class="category-container">
+            <div class="category-name-container">
+                <div class="main"><span lang="{{ $printAllLanguage ? 'ja' : $language }}">{{ $printAllLanguage ? $category['nameJa'] : $category['name'] }}</span></div>
+                <div class="sub">
+                    @if ($printAllLanguage)
+                        @php
+                            $listName = [];
+                            foreach ($category['name'] as $name) {
+                                if ($name['language'] != 'JA') {
+                                    $listName[] = "<span lang='" . strtolower($name['language']) . "'>" . $name['value'] . "</span>";
+                                }
+                            }
+                            $listName = implode('/', $listName)
+                        @endphp
+                    @endif
+                    {!! $printAllLanguage ? $listName : "<span lang='ja'>" . $category['nameJa'] . "</span>" !!}
+                </div>
+            </div>
+            @php($menus = $category['menus'])
+            <ul class="menu-list">
+                @foreach($menus as $menu)
+                    <li class="menu">
+                        <table class="wrap">
+                            <tr>
+                                <td class="column-left img-container">
+                                    <img
+                                        src="{{$menu['images'][0]}}"
+                                        alt="まぐろの魚種別食べ比べセット">
+                                </td>
+                                <td class="column-right text-container">
+                                    <div class="menu-name main">
+                                        <span lang="{{ $printAllLanguage ? 'ja' : $language }}">{{$menu['name']}}</span>
+                                    </div>
+                                    <ul class="menu-name sub">
+                                        @if ($printAllLanguage)
+                                            @foreach($menu['nameTranslations'] as $translation)
+                                                <li><span lang="{{strtolower($translation['languageKey'])}}">{{$translation['value']}}</span></li>
+                                            @endforeach
+                                        @else
+                                            <li><span lang="ja">{{$menu['nameJa']}}</span></li>
+                                        @endif
+                                    </ul>
+                                    <div class="price">{{$menu['price']}}<span lang="ja">円</span></div>
+                                    <div class="tax">
+                                        @if ($printAllLanguage)
+                                            {!! $styledTaxIncludedText !!}
+                                        @else
+                                            <span lang="{{$language}}">{{ $taxIncludedText }}</span>/
+                                            <span lang="ja">{{ $taxIncludedTextJa }}</span>
+                                        @endif
+                                    </div>
+                                    @foreach($menu['pictograms'] as $pictogram)
+                                        <img class="pictogram-image" src="{{$pictogram}}" alt="pictogram"/>
+                                    @endforeach
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
+                @endforeach
+            </ul>
+        </article>
+    </section>
+@endforeach
+
+</body>
+</html>

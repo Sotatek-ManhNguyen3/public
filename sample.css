@@ -1,0 +1,351 @@
+@charset "utf-8";
+
+/*--------------------------
+印刷設定
+---------------------------*/
+
+ul {
+    padding-inline-start: 0px;
+}
+
+
+/*基本設定*/
+
+@media print {
+    html, body {
+        height: auto;
+    }
+}
+
+
+/* A4縦用のベース設定 */
+
+@page {
+    size: A4 portrait;
+    /* 横の場合はlandscape */
+    margin: 0mm;
+}
+
+
+/* 各要素の余白リセット */
+
+* {
+    margin: 0mm;
+    padding: 0mm;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+/* 印刷時の調子を整える */
+
+body {
+    width: 210mm;
+    /* 用紙の横幅を改めて指定 Chrome用 */
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+    line-height: 1.5em;
+}
+
+
+/* 印刷1ページ用のコンテンツはここで定義 */
+
+.page {
+    width: 210mm;
+    /* 用紙の横幅を改めて指定 */
+    height: 296.5mm;
+    /* 高さには0.5mm余裕をもたせる */
+    page-break-after: always;
+    box-sizing: border-box;
+    /*padding: 10mm 15mm;*/
+    /* 用紙の余白 */
+    font-size: 11pt;
+}
+
+.last-page {
+    page-break-after: unset !important;
+}
+
+.balance_sheet .page {
+    padding: 10mm 10mm;
+    /* 用紙の余白 */
+}
+
+.btn {
+    display: none;
+}
+
+
+/* プレビュー用のスタイル */
+
+@media screen {
+    body {
+        background: #eee;
+        width: 100%;
+    }
+    .page {
+        background: white;
+        /* 背景を白く */
+        box-shadow: 0 .5mm 2mm rgba(0, 0, 0, .3);
+        /* ドロップシャドウ */
+        /*margin-top: 20px;*/
+        margin-right: auto;
+        margin-left: auto;
+    }
+    /*印刷ボタン*/
+    .btn {
+        display: block;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+    }
+    .btn button#print {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        background-repeat: no-repeat;
+        background-image: url(https://raw.githubusercontent.com/Sotatek-ManhNguyen3/public/ec2bd6fb14b8efa489fa35331928b54e2851b3bd/img/print.svg);
+        background-position: 11px center;
+        background-size: 28px auto;
+        background-color: #FFFFFF;
+        filter: drop-shadow(4px 4px 6px rgb(0, 0, 0, 0.4));
+        cursor: pointer;
+        display: block;
+        border: none;
+        margin-bottom: 20px;
+    }
+    .btn button#download {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        background-repeat: no-repeat;
+        background-image: url(https://raw.githubusercontent.com/Sotatek-ManhNguyen3/public/ec2bd6fb14b8efa489fa35331928b54e2851b3bd/img/download.svg);
+        background-position: 11px center;
+        background-size: 28px auto;
+        background-color: #FFFFFF;
+        filter: drop-shadow(4px 4px 6px rgb(0, 0, 0, 0.4));
+        cursor: pointer;
+        display: block;
+        border: none;
+    }
+}
+
+
+/*--------------------------
+テンプレート
+---------------------------*/
+
+
+/*背景画像設定*/
+
+section.page {
+    background-image: url(https://raw.githubusercontent.com/Sotatek-ManhNguyen3/public/master/bg/bg_page.jpg);
+    background-repeat: repeat-y;
+    background-position: center top;
+    background-size: 100% auto;
+    background-origin: border-box;
+}
+
+section.page.cover {
+    background-image: url(https://raw.githubusercontent.com/Sotatek-ManhNguyen3/public/master/bg/bg_cover.jpg);
+    position: relative;
+}
+
+
+/*フォント*/
+
+section.page {
+    font-family: YuMincho, "Yu Mincho", "Hiragino Mincho ProN", serif;
+}
+
+
+/*表紙設定*/
+
+
+/*スポット名*/
+
+section.page.cover .spot-name-container {
+    text-align: center;
+    padding-top: 50mm;
+    margin-bottom: 20mm;
+}
+
+section.page.cover .spot-name-container .main {
+    font-size: 20pt;
+    margin-bottom: 3mm;
+}
+
+section.page.cover .spot-name-container .sub {
+    font-size: 12pt;
+    margin-bottom: 3mm;
+}
+
+
+/*メニューブック名*/
+
+section.page.cover .menu-book-name-container {
+    text-align: center;
+    font-size: 12pt;
+    margin-bottom: 3mm;
+}
+
+section.page.cover .menu-book-name-container .main {
+    font-size: 30pt;
+    margin-bottom: 5mm;
+}
+
+section.page.cover .menu-book-name-container .sub {
+    font-size: 12pt;
+    margin-bottom: 3mm;
+}
+
+
+/*メニューブックタイトル*/
+
+section.page.cover .page-title-container {
+    text-align: center;
+    font-size: 12pt;
+    position: absolute;
+    bottom: 10mm;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+}
+
+section.page.cover .page-title-container .main {
+    font-size: 15pt;
+    margin-bottom: 1mm;
+}
+
+section.page.cover .page-title-container .sub {
+    font-size: 12pt;
+    margin-bottom: 3mm;
+}
+
+
+/*メニューページ設定*/
+
+
+/*カテゴリ*/
+
+section.page .category-container {}
+
+section.page .category-container .category-name-container {
+    text-align: center;
+    padding-top: 15mm;
+    margin-bottom: 15mm;
+}
+
+section.page .category-container .category-name-container .main {
+    font-size: 20pt;
+    margin-bottom: 3mm;
+}
+
+section.page .category-container .category-name-container .sub {
+    font-size: 10pt;
+}
+
+
+/*メニューリスト*/
+
+table {
+    border-spacing: 0;
+    width: 100%;
+}
+
+td {
+    vertical-align: top;
+}
+
+.column-left {
+    width: 40%;
+}
+
+.column-right {
+    width: 60%;
+}
+
+.menu-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 15mm;
+    padding-right: 15mm;
+}
+
+/*section.page .category-container ul.menu-list li.menu {*/
+/*    width: 100%;*/
+/*    list-style-type: none;*/
+/*    padding-left: 2mm;*/
+/*    padding-right: 2mm;*/
+/*    margin-bottom: 5mm;*/
+/*}*/
+
+.menu {
+    width: 100%;
+    list-style-type: none;
+    padding-left: 2mm;
+    padding-right: 2mm;
+    margin-bottom: 5mm;
+}
+
+section.page .category-container ul.menu-list li .wrap .img-container {
+    width: 40%;
+    padding-right: 5mm;
+}
+
+section.page .category-container ul.menu-list li .wrap .img-container img {
+    width: 100%;
+    height: auto;
+    vertical-align: bottom;
+}
+
+section.page .category-container ul.menu-list li .wrap .text-container {
+    width: 60%;
+}
+
+section.page .category-container ul.menu-list li .wrap .text-container .menu-name.main {
+    font-size: 12pt;
+    margin-bottom: 1mm;
+    line-height: 1.4em;
+    margin-top: -15px;
+}
+
+section.page .category-container ul.menu-list li .wrap .text-container ul.menu-name.sub {
+    font-size: 10pt;
+    /*margin-bottom: 2mm;*/
+}
+
+section.page .category-container ul.menu-list li .wrap .text-container ul.menu-name.sub li {
+    font-size: 9pt;
+    line-height: 1.3em;
+    list-style-type: none;
+}
+
+section.page .category-container ul.menu-list li .wrap .text-container .price {
+    font-size: 16pt;
+}
+
+section.page .category-container ul.menu-list li .wrap .text-container .price span {
+    font-size: 10pt;
+    padding-left: 1mm;
+}
+
+section.page .category-container ul.menu-list li .wrap .text-container .tax {
+    font-size: 5pt;
+    line-height: 1.4em;
+    margin-bottom: 3mm;
+}
+
+.pictogram-image {
+    width: 7mm;
+    margin-right: 1mm;
+    margin-bottom: 0mm;
+    list-style-type: none;
+}
+
+
+
+
+
