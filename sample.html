@@ -112,7 +112,7 @@
                             <tr>
                                 <td class="column-left img-container">
                                     <img
-                                        src="{{$menu['images'][0]}}"
+                                        src="data:image/png;base64, {{base64_encode(file_get_contents($menu['images'][0]))}}"
                                         alt="まぐろの魚種別食べ比べセット">
                                 </td>
                                 <td class="column-right text-container">
@@ -138,7 +138,7 @@
                                         @endif
                                     </div>
                                     @foreach($menu['pictograms'] as $pictogram)
-                                        <img class="pictogram-image" src="{{$pictogram}}" alt="pictogram"/>
+                                        <img class="pictogram-image" src="data:image/png;base64, {{base64_encode(file_get_contents($pictogram))}}" alt="pictogram"/>
                                     @endforeach
                                 </td>
                             </tr>

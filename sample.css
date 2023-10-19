@@ -140,7 +140,7 @@ body {
 /*背景画像設定*/
 
 section.page {
-    background-image: url(https://raw.githubusercontent.com/Sotatek-ManhNguyen3/public/master/bg/bg_page.jpg);
+    background-image: url("data:image/png;base64, {{base64_encode(file_get_contents('https://raw.githubusercontent.com/Sotatek-ManhNguyen3/public/master/bg/bg_page.jpg'))}}");
     background-repeat: repeat-y;
     background-position: center top;
     background-size: 100% auto;
@@ -148,7 +148,7 @@ section.page {
 }
 
 section.page.cover {
-    background-image: url(https://raw.githubusercontent.com/Sotatek-ManhNguyen3/public/master/bg/bg_cover.jpg);
+    background-image: url("data:image/png;base64, {{base64_encode(file_get_contents('https://raw.githubusercontent.com/Sotatek-ManhNguyen3/public/master/bg/bg_cover.jpg'))}}");
     position: relative;
 }
 
@@ -309,7 +309,6 @@ section.page .category-container ul.menu-list li .wrap .text-container .menu-nam
     font-size: 12pt;
     margin-bottom: 1mm;
     line-height: 1.4em;
-    margin-top: -15px;
 }
 
 section.page .category-container ul.menu-list li .wrap .text-container ul.menu-name.sub {
@@ -324,6 +323,7 @@ section.page .category-container ul.menu-list li .wrap .text-container ul.menu-n
 }
 
 section.page .category-container ul.menu-list li .wrap .text-container .price {
+    margin-top: 2mm;
     font-size: 16pt;
 }
 
